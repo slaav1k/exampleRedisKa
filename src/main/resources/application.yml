@@ -2,20 +2,34 @@ spring:
   application:
     name: exampleRedisKa
 
-  h2:
-    console:
-      enabled: true
+#  h2:
+#    console:
+#      enabled: true
+
+#  datasource:
+#    url: jdbc:h2:mem:rediska;CACHE_SIZE=0
+#    driver-class-name: org.h2.Driver
+#    username: admin
+#    password:
+
+#  jpa:
+#    database-platform: org.hibernate.dialect.H2Dialect
+#    hibernate:
+#      ddl-auto: update
 
   datasource:
-    url: jdbc:h2:mem:rediska;CACHE_SIZE=0
-    driver-class-name: org.h2.Driver
-    username: admin
-    password:
+    url: jdbc:postgresql://localhost:5432/rediska
+    username: postgres
+    password: 2904
+    driver-class-name: org.postgresql.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
+      properties:
+        hibernate.cache.use_second_level_cache: false  # ????????? ??? ??????? ??????
+        hibernate.cache.use_query_cache: false          # ????????? ??????????? ????????
 
   data:
     redis:
