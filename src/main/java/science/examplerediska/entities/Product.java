@@ -19,7 +19,7 @@ public class Product {
     private int quantity;
 
     public double calculateTotalCost() {
-        return price * quantity;
+        return price * quantity * 1.0;
     }
 
 
