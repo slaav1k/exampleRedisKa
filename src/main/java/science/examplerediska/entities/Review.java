@@ -19,8 +19,6 @@ public class Review {
 
     @ManyToOne
     private Product product;
-
     private int rating;
-
     private String comment;
 }
