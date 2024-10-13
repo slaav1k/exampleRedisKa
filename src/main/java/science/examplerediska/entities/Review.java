@@ -1,27 +1,26 @@
 package science.examplerediska.entities;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Entity
-@Table(name = "PRODUCTS")
+@Table(name = "REVIEWS")
 @NoArgsConstructor()
 @AllArgsConstructor()
-public class Product {
+public class Review {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private double price;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Review> reviews;
+    @ManyToOne
+    private Product product;
 
+    private int rating;
 
-
+    private String comment;
 }

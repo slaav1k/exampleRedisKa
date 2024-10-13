@@ -9,14 +9,12 @@ public class ProductDTO {
     private int id;
     private String name;
     private double price;
-    private int quantity;
-    private double totalCost;
+    private double avgRating;
 
-    public ProductDTO(int id, String name, double price, int quantity, double totalCost) {
+    public ProductDTO(int id, String name, double price, double avgRating) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.quantity = quantity;
-        this.totalCost = totalCost;
+        this.avgRating = avgRating;
     }
 }

@@ -4,8 +4,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import science.examplerediska.entities.Product;
+import science.examplerediska.entities.Review;
 import science.examplerediska.repositories.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 @Component
@@ -14,16 +16,27 @@ public class DataInitializer {
     @Bean
     public CommandLineRunner loadData(ProductRepository productRepository) {
         return args -> {
-            productRepository.save(new Product(0, "Laptop", 1200.00, 3));
-            productRepository.save(new Product(0, "Phone", 800.00, 10));
-            productRepository.save(new Product(0, "Tablet", 500.00, 2));
-            productRepository.save(new Product(777, "PC", 1500.00, 1));
             Random rand = new Random();
-            for (int i = 1; i <= 1_000; i++) {
+
+            // Генерация случайных продуктов и отзывов
+            for (int i = 1; i <= 100; i++) {
                 double randomPrice = 10 + (3500 - 10) * rand.nextDouble();
                 randomPrice = Math.round(randomPrice * 100.0) / 100.0;
-                int randomTotalPrice = 1 + rand.nextInt(10_000);
-                productRepository.save(new Product(0, "Product " + i, randomPrice, randomTotalPrice));
+
+                Product product = new Product(0, "Product " + i, randomPrice, new ArrayList<>());
+
+                // Генерация случайного количества отзывов (1-5)
+                int reviewCount = 20 + rand.nextInt(100);
+                for (int j = 0; j < reviewCount; j++) {
+                    int randomRating = 1 + rand.nextInt(5); // Рейтинг от 1 до 5
+                    String randomComment = "This is a review for Product " + i;
+
+                    Review review = new Review(0, product, randomRating, randomComment);
+                    product.getReviews().add(review);  // Добавляем отзыв к продукту
+                }
+
+                // Сохранение продукта и отзывов в БД
+                productRepository.save(product);
             }
         };
     }
