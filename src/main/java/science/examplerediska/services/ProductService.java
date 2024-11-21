@@ -32,7 +32,8 @@ public class ProductService {
     }
 
 
-    public ProductDTO getProductById(int id) {
+    public ProductDTO getProductById(int id) throws InterruptedException {
+        Thread.sleep(200);
         return productRepository.findById(id)
                 .map(product -> new ProductDTO(
                         product.getId(),
@@ -61,10 +62,12 @@ public class ProductService {
             return productDTO;
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Could not get product with id " + id);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public ProductDTO getProductRandom() {
+    public ProductDTO getProductRandom() throws InterruptedException {
         long countProducts = productRepository.countAllProducts();
         int randomId = new Random().nextInt(1, (int) countProducts);
 //        return getProductById(randomId);

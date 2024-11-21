@@ -19,6 +19,14 @@ spring:
 
   data:
     redis:
-      host: localhost
+      host: 127.0.0.1
       port: 6379
+
+  cloud:
+    aws:
+      region:
+        static: ru-central1
+      credentials:
+        access-key: YCAJEdQAUZGFpUJG0XfWH0tyq
+        secret-key: YCPG3ui0NGEcjiIovjHOeGaElh4XXyHruiUX6hiU
 

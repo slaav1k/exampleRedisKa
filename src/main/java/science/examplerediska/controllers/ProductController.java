@@ -17,12 +17,12 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/{id}")
-    public ProductDTO getProductById(@PathVariable int id) {
+    public ProductDTO getProductById(@PathVariable int id) throws InterruptedException {
         return productService.getProductById(id);
     }
 
     @GetMapping("/random")
-    public ProductDTO getProductRandom() {
+    public ProductDTO getProductRandom() throws InterruptedException {
         return productService.getProductRandom();
     }
 
